@@ -20,6 +20,53 @@
     <link rel="stylesheet" type="text/css" href="css/kindle.css" />
 
     <script type="text/javascript">
+      var bin_dates = [
+        ["Brown Bin", "23/08/2023"],
+        ["Black Bin", "30/08/2023"],
+        ["Blue Bin", "06/09/2023"],
+        ["Black Bin", "13/09/2023"],
+        ["Brown Bin", "20/09/2023"],
+        ["Black Bin", "27/09/2023"],
+        ["Blue Bin", "04/10/2023"],
+        ["Black Bin", "11/10/2023"],
+        ["Brown Bin", "18/10/2023"],
+        ["Black Bin", "25/10/2023"],
+        ["Blue Bin", "01/11/2023"],
+        ["Black Bin", "08/11/2023"],
+        ["Brown Bin", "15/11/2023"],
+        ["Black Bin", "22/11/2023"],
+        ["Blue Bin", "29/11/2023"],
+        ["Black Bin", "06/12/2023"],
+        ["Brown Bin", "13/12/2023"],
+        ["Black Bin", "20/12/2023"],
+        ["Blue Bin", "27/12/2023"],
+        ["Black Bin", "03/01/2024"],
+        ["Brown Bin", "10/01/2024"],
+        ["Black Bin", "17/01/2024"],
+        ["Blue Bin", "24/01/2024"],
+        ["Black Bin", "31/01/2024"],
+        ["Brown Bin", "07/02/2024"],
+        ["Black Bin", "14/02/2024"],
+        ["Blue Bin", "21/02/2024"],
+        ["Black Bin", "28/02/2024"],
+        ["Brown Bin", "06/03/2024"],
+        ["Black Bin", "13/03/2024"],
+        ["Blue Bin", "20/03/2024"],
+        ["Black Bin", "27/03/2024"],
+        ["Brown Bin", "03/04/2024"],
+        ["Black Bin", "10/04/2024"],
+        ["Blue Bin", "17/04/2024"],
+        ["Black Bin", "24/04/2024"],
+        ["Brown Bin", "01/05/2024"],
+        ["Black Bin", "08/05/2024"],
+        ["Blue Bin", "15/05/2024"],
+        ["Black Bin", "22/05/2024"],
+        ["Brown Bin", "29/05/2024"],
+        ["Black Bin", "05/06/2024"],
+        ["Blue Bin", "12/06/2024"],
+        ["Black Bin", "19/06/2024"],
+        ["Brown Bin", "26/06/2024"],
+      ];
       function showTime() {
         var date = new Date();
         var h = date.getHours(); // 0 - 23
@@ -260,9 +307,18 @@
           momentWithCorrectUtcOffset(new Date(data.dt * 1000)).format(
             timeFormat
           );
+        var bin = arrayLookup(getCurrentDate(), bin_dates, 1, 0);
+        if (bin === null) {
+          bincolor.style.display = "none";
+          lastUpdate.style.display = "block";
+        } else {
+          lastUpdate.style.display = "none";
+          bincolor.style.display = "block";
+          bincolor.innerHTML = bin;
+        }
 
         date.innerHTML = momentWithCorrectUtcOffset(new Date()).format(
-          "dd, ll"
+          "ddd, ll"
         );
 
         var sunrise = momentWithCorrectUtcOffset(
@@ -335,6 +391,7 @@
       var city = null;
       var description = null;
       var lastUpdate = null;
+      var bincolor = null;
       var date = null;
       var sun = null;
       var lang = null;
@@ -497,6 +554,7 @@
         });
         description = document.getElementById("description");
         lastUpdate = document.getElementById("lastUpdate");
+        bincolor = document.getElementById("bincolor");
         date = document.getElementById("date");
         sun = document.getElementById("sun");
 
@@ -622,6 +680,39 @@
           return moment(dateTime);
         }
       }
+
+      /**
+       * This JavaScript function (specially meant for Google Apps Script or GAS) Get the lookup (vertical) value from a multi-dimensional array.
+       *
+       * @version 1.1.0
+       *
+       * @param {Object} searchValue The value to search for the lookup (vertical).
+       * @param {Array} array The multi-dimensional array to be searched.
+       * @param {Number} searchIndex The column-index of the array where to search.
+       * @param {Number} returnIndex The column-index of the array from where to get the returning matching value.
+       * @return {Object} Returns the matching value found else returns null.
+       */
+      function arrayLookup(searchValue, array, searchIndex, returnIndex) {
+        // Posted on Tathyika.com (also refer for more codes there)
+        var returnVal = null;
+        var i;
+        for (i = 0; i < array.length; i++) {
+          if (array[i][searchIndex] == searchValue) {
+            returnVal = array[i][returnIndex];
+            break;
+          }
+        }
+
+        return returnVal;
+      }
+
+      function getCurrentDate() {
+        const t = new Date();
+        const date = ("0" + t.getDate()).slice(-2);
+        const month = ("0" + (t.getMonth() + 1)).slice(-2);
+        const year = t.getFullYear();
+        return date + "/" + month + "/" + year;
+      }
     </script>
   </head>
 
@@ -638,6 +729,7 @@
       </div>
       <div id="description"></div>
       <div id="lastUpdate"></div>
+      <div id="bincolor"></div>
       <div class="forecast">
         <div class="col col1">
           <div id="time1" class="colTime"></div>

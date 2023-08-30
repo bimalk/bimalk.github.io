@@ -80,6 +80,14 @@ html.night {
   left: 3.3%;
 }
 
+#bincolor {
+  font-size: 25px;
+  font-size: 3rem;
+  position: absolute;
+  bottom: 47%;
+  left: 3.3%;
+}
+
 #description {
   position: absolute;
   right: 3.3%;
@@ -89,8 +97,8 @@ html.night {
 }
 
 #icon {
-  font-size: 250px;
-  font-size: 29rem;
+  font-size: 230px;
+  font-size: 27rem;
 }
 
 #iconWrapper {
@@ -133,8 +141,8 @@ html.night {
   position: absolute;
   bottom: 0;
   left: 3.3%;
-  font-size: 30px;
-  font-size: 4.3rem;
+  font-size: 20px;
+  font-size: 3rem;
 }
 
 #sun {
@@ -185,6 +193,11 @@ html.night {
 }
 
 .landscape #lastUpdate {
+  font-size: 7.1px;
+  font-size: 1.4rem;
+}
+
+.landscape #bincolor {
   font-size: 7.1px;
   font-size: 1.4rem;
 }
