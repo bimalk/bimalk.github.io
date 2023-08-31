@@ -61,8 +61,8 @@ html.night {
   letter-spacing: 1px;
 }
 #temp {
-  font-size: 200px;
-  font-size: 26rem;
+  font-size: 175px;
+  font-size: 23rem;
   display: inline-block;
 }
 
@@ -97,8 +97,8 @@ html.night {
 }
 
 #icon {
-  font-size: 230px;
-  font-size: 27rem;
+  font-size: 175px;
+  font-size: 23rem;
 }
 
 #iconWrapper {
